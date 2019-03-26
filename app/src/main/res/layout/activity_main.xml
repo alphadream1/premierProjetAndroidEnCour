@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <RadioGroup
+        android:id="@+id/monRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <RadioButton
+            android:id="@+id/rbJaime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/maCouleur"
+            android:checked="true"
+            android:text="@string/jaime"
+            android:textColorLink="@color/maCouleur" />
+
+        <RadioButton
+            android:id="@+id/rbJaimePas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/jaimepas"
+            android:textColorLink="@color/maCouleur" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvComplement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:labelFor="@+id/etSaisirVotreNom"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/compl_ment" />
+
+        <EditText
+            android:id="@+id/etSaisirVotreNom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:autofillHints=""
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/tvComplement"
+            android:text="@string/saisir_votre_nom_ici"
+            android:textColor="@color/colorPrimary"
+            android:textColorLink="@color/cardview_dark_background"
+            tools:targetApi="o" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/todo"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/btValider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/maCouleur"
+            android:text="@string/valider"
+            android:textColor="@color/cardview_light_background" />
+
+        <Button
+            android:id="@+id/btAnnuler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/maCouleur"
+            android:text="@string/annuler"
+            android:textColor="@color/cardview_light_background" />
+
+    </LinearLayout>
+</LinearLayout>

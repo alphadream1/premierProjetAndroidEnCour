@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name" translatable="false">premierprojetcourandroid</string>
+    <string name="ma_chaine">Hello</string>
+    <string name="jaime">J\'aime</string>
+    <string name="jaimepas">J\'aime Pas</string>
+    <string name="compl_ment">Complément :</string>
+    <string name="annuler">annuler</string>
+    <string name="todo">TODO</string>
+    <string name="ajouter">ajouter</string>
+    <string name="saisir_votre_nom_ici">Saisir votre nom ici</string>
+    <string name="valider">Valider</string>
+    <string name="next" />
+</resources>
