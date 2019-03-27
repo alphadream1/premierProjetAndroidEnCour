@@ -10,4 +10,7 @@
     <string name="saisir_votre_nom_ici">Saisir votre nom ici</string>
     <string name="valider">Valider</string>
     <string name="next" />
+    <string name="le_texte_ici">le texte ici</string>
+    <string name="retour">retour</string>
+    <string name="next_screen">Next Screen</string>
 </resources>
