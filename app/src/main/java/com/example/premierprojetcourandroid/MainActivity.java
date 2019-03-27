@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, SecondActivity.class);
             intent.putExtra("maCle", etSaisirVotreNom.getText().toString());
             startActivity(intent);
-            finish();
         }
     }
 
