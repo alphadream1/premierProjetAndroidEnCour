@@ -17,10 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btValider, btAnnuler;
     private RadioGroup monRadioGroup;
     private RadioButton rbJaime, rbJaimePas;
-    private TextView textView;
+    private EditText etSaisirVotreNom;
     private ImageView iv_android;
     private Button btNextScreen;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btValider = findViewById(R.id.btValider);
         btAnnuler = findViewById(R.id.btAnnuler);
         monRadioGroup = findViewById(R.id.monRadioGroup);
-        textView = findViewById(R.id.tv);
+        etSaisirVotreNom = findViewById(R.id.etSaisirVotreNom);
         iv_android = findViewById(R.id.iv_android);
         rbJaime = findViewById(R.id.rbJaime);
         rbJaimePas = findViewById(R.id.rbJaimePas);
@@ -83,21 +83,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             iv_android.setImageResource(R.mipmap.ic_valider);
             btNextScreen.setVisibility(View.VISIBLE);
             if (rbJaime.isChecked()) {
-                textView.setText(rbJaime.getText());
+                etSaisirVotreNom.setText(rbJaime.getText());
                 iv_android.setColorFilter(Color.GREEN);
             } else if (rbJaimePas.isChecked()) {
-                textView.setText(rbJaimePas.getText());
+                etSaisirVotreNom.setText(rbJaimePas.getText());
                 iv_android.setColorFilter(Color.RED);
             }
         } else if (v == btAnnuler) {
             iv_android.setImageResource(R.mipmap.ic_annuler);
             iv_android.setColorFilter(getResources().getColor(R.color.marron, getTheme()));
-            textView.setText("");
+            etSaisirVotreNom.setText("");
             monRadioGroup.clearCheck();
             btNextScreen.setVisibility(View.INVISIBLE);
         } else if (v == btNextScreen) {
             Intent intent = new Intent(this, SecondActivity.class);
-            intent.putExtra("maCle", textView.getText().toString());
+            intent.putExtra("maCle", etSaisirVotreNom.getText().toString());
             startActivity(intent);
         }
     }
