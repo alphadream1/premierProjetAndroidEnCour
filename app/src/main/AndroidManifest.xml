@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.premierprojetcourandroid">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -20,14 +26,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity" />
-
+        <activity android:name=".ServiceExACtivity" />
 
         <receiver android:name=".MyBroadcast">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

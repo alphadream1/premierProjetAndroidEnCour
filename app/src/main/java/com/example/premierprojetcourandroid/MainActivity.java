@@ -1,12 +1,16 @@
 package com.example.premierprojetcourandroid;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int ITEM_ID_AD = 1;
     private static final int ITEM_ID_TP = 2;
     private static final int ITEM_ID_DP = 3;
+    private static final int ITEM_ID_DAL = 4;
 
     // exo supplementaire
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -102,37 +107,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.add(0, ITEM_ID_AD, 0, "AlertDialog");
         menu.add(0, ITEM_ID_TP, 0, "TimePicker");
         menu.add(0, ITEM_ID_DP, 0, "DatePicker");
+        menu.add(0, ITEM_ID_DAL, 0, "Service Exemple");
         return super.onCreateOptionsMenu(menu);
     }
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case 1:
-                AlertDialog.Builder alertDialogBuider = new AlertDialog.Builder(this);
-                alertDialogBuider.setMessage("voici mon alert");
-                alertDialogBuider.setTitle("mon alert");
-                alertDialogBuider.setPositiveButton("ok",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, "click sur ok", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                alertDialogBuider.show();
-                break;
-            case 2:
-                TimePickerDialog timePickerDialog = new TimePickerDialog(this, this, 12, 30, true);
-                timePickerDialog.show();
-                break;
-            case 3:
-                Calendar calendar = Calendar.getInstance();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DAY_OF_MONTH));
-                datePickerDialog.show();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -145,23 +122,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Ici je lance le DatePicker
             //Gestion de la date
             Calendar calendar = Calendar.getInstance();
-//Création de la fenêtre
-//Pour le callback -> Alt+entree -> implémente méthode -> Génère la méthode onTimeSet
+            //Création de la fenêtre
+            //Pour le callback -> Alt+entree -> implémente méthode -> Génère la méthode onTimeSet
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, this,
                     calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.DAY_OF_MONTH));
-//Afficher la fenêtre
+            //Afficher la fenêtre
             datePickerDialog.show();
 
         } else if (item.getItemId() == ITEM_ID_AD) {
             //Ici je lance l'AlertDialog
             //Préparation de la fenêtre
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-//Message
+            //Message
             alertDialogBuilder.setMessage("Mon message");
-//titre
+            //titre
             alertDialogBuilder.setTitle("Mon titre");
-//bouton ok
+            //bouton ok
             alertDialogBuilder.setPositiveButton("ok",
                     new DialogInterface.OnClickListener() {
                         @Override
@@ -171,15 +148,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
-//Icone
+            //Icone
             alertDialogBuilder.setIcon(R.mipmap.ic_launcher);
-//Afficher la fenêtre
+            //Afficher la fenêtre
             alertDialogBuilder.show();
-
+        } else if (item.getItemId() == ITEM_ID_DAL) {
+            //Etape 1 : Est ce qu'on a déjà la permission ?
+            //Attention prendre le Manifest d’android.util
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                //On a la permission
+                startActivity(new Intent(this, ServiceExACtivity.class));
+            } else {
+                //Etape 2 : On affiche la fenêtre de demande de permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            }
         }
-
-
         return super.onOptionsItemSelected(item);
+    }
+
+    //--------------------
+    //Callback demande permission
+    //--------------------
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] gr) {
+        super.onRequestPermissionsResult(requestCode, permissions, gr);
+
+        //Est ce que c'est la permission qu'on a demandé ?
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            //ON a la permission
+            startActivity(new Intent(this, ServiceExACtivity.class));
+        } else {
+            //On n'a pas la permission
+            Toast.makeText(this, "il faut la permission pour aller sur l'écran", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //-------------------
@@ -218,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //--------------------
     //Private
     //--------------------
+
 
 }
 

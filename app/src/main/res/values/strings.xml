@@ -13,4 +13,7 @@
     <string name="le_texte_ici">le texte ici</string>
     <string name="retour">retour</string>
     <string name="next_screen">Next Screen</string>
+    <string name="start">Start</string>
+    <string name="textview">TextView</string>
+    <string name="stop">Stop</string>
 </resources>
