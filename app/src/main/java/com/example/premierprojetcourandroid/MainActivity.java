@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 //On a la permission
-                startActivity(new Intent(this, ServiceActivity.class));
+                startActivity(new Intent(this, ServiceExActivity.class));
             } else {
                 //Etape 2 : On affiche la fenêtre de demande de permission
                 ActivityCompat.requestPermissions(this,
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             //ON a la permission
-            startActivity(new Intent(this, ServiceActivity.class));
+            startActivity(new Intent(this, ServiceExActivity.class));
         } else {
             //On n'a pas la permission
             Toast.makeText(this, "il faut la permission pour aller sur l'écran", Toast.LENGTH_SHORT).show();
@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String maDate = FORMAT.format(dateChoisi.getTime());
         Toast.makeText(this, maDate, Toast.LENGTH_LONG).show();
-        // je ne sais pas ce qui est le mieux mais la 2eme genere plus de code!!!
+
     }
 
     //--------------------

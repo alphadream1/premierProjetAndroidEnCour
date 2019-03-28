@@ -14,6 +14,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.premierprojetcourandroid.MyApplication;
+
 public class MyLocationService extends Service implements LocationListener {
 
     LocationManager locationMgr;
@@ -57,7 +59,6 @@ public class MyLocationService extends Service implements LocationListener {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -68,7 +69,7 @@ public class MyLocationService extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         Toast.makeText(this, location.toString(), Toast.LENGTH_SHORT).show();
-
+        MyApplication.getBus().post(location);
     }
 
     @Override

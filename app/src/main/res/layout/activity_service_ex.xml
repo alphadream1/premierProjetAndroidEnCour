@@ -20,6 +20,12 @@
         android:layout_weight="0"
         android:text="@string/stop" />
 
+    <Button
+        android:id="@+id/btLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/load" />
+
     <TextView
         android:id="@+id/tvEcranService"
         android:layout_width="wrap_content"
