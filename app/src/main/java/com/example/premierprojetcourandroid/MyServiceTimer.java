@@ -7,11 +7,11 @@ import android.os.IBinder;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MyService extends Service {
+public class MyServiceTimer extends Service {
 
     private Timer timer;
 
-    public MyService() {
+    public MyServiceTimer() {
     }
 
     @Override
