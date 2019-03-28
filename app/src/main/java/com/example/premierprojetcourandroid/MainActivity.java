@@ -17,10 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btValider, btAnnuler;
     private RadioGroup monRadioGroup;
     private RadioButton rbJaime, rbJaimePas;
-    private EditText etSaisirVotreNom;
+    private TextView textView;
     private ImageView iv_android;
     private Button btNextScreen;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btValider = findViewById(R.id.btValider);
         btAnnuler = findViewById(R.id.btAnnuler);
         monRadioGroup = findViewById(R.id.monRadioGroup);
-        etSaisirVotreNom = findViewById(R.id.etSaisirVotreNom);
+        textView = findViewById(R.id.tv);
         iv_android = findViewById(R.id.iv_android);
         rbJaime = findViewById(R.id.rbJaime);
         rbJaimePas = findViewById(R.id.rbJaimePas);
@@ -83,21 +83,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             iv_android.setImageResource(R.mipmap.ic_valider);
             btNextScreen.setVisibility(View.VISIBLE);
             if (rbJaime.isChecked()) {
-                etSaisirVotreNom.setText(rbJaime.getText());
+                textView.setText(rbJaime.getText());
                 iv_android.setColorFilter(Color.GREEN);
             } else if (rbJaimePas.isChecked()) {
-                etSaisirVotreNom.setText(rbJaimePas.getText());
+                textView.setText(rbJaimePas.getText());
                 iv_android.setColorFilter(Color.RED);
             }
         } else if (v == btAnnuler) {
             iv_android.setImageResource(R.mipmap.ic_annuler);
             iv_android.setColorFilter(getResources().getColor(R.color.marron, getTheme()));
-            etSaisirVotreNom.setText("");
+            textView.setText("");
             monRadioGroup.clearCheck();
             btNextScreen.setVisibility(View.INVISIBLE);
         } else if (v == btNextScreen) {
             Intent intent = new Intent(this, SecondActivity.class);
-            intent.putExtra("maCle", etSaisirVotreNom.getText().toString());
+            intent.putExtra("maCle", textView.getText().toString());
             startActivity(intent);
         }
     }
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 //On a la permission
-                startActivity(new Intent(this, ServiceExACtivity.class));
+                startActivity(new Intent(this, ServiceActivity.class));
             } else {
                 //Etape 2 : On affiche la fenêtre de demande de permission
                 ActivityCompat.requestPermissions(this,
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             //ON a la permission
-            startActivity(new Intent(this, ServiceExACtivity.class));
+            startActivity(new Intent(this, ServiceActivity.class));
         } else {
             //On n'a pas la permission
             Toast.makeText(this, "il faut la permission pour aller sur l'écran", Toast.LENGTH_SHORT).show();

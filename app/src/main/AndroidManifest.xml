@@ -14,13 +14,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <service
-            android:name=".MyServiceLocation"
+            android:name=".service.MyLocationService"
             android:enabled="true"
             android:exported="true"></service>
-        <service
-            android:name=".MyServiceTimer"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -30,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity" />
-        <activity android:name=".ServiceExACtivity" />
+        <activity android:name=".ServiceActivity" />
 
         <receiver android:name=".MyBroadcast">
             <intent-filter>
