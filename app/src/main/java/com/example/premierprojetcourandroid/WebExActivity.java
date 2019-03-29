@@ -9,12 +9,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.premierprojetcourandroid.utils.OkHttpUtils;
 
 public class WebExActivity extends AppCompatActivity {
 
     private WebView wvWebEx;
     private EditText etWebEx;
     private TextView tvWebEx;
+    MonAT monAT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +38,16 @@ public class WebExActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         wvWebEx.loadUrl(etWebEx.getText().toString());
+        if (monAT == null || monAT.getStatus() == AsyncTask.Status.FINISHED) {
+            monAT = new MonAT();
+            monAT.execute();
+        } else {
+            Toast.makeText(this, "Tache déjà lancée", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
-      /* -------------------
+    /* ---------------------
     // AsyncTask
     --------------------- */
 
@@ -46,11 +56,12 @@ public class WebExActivity extends AppCompatActivity {
         String resultat;
         Exception exception;
 
+
         @Override
         protected Object doInBackground(Object[] objects) {
 
             try {
-                resultat = "Faire la requete";
+                resultat = OkHttpUtils.sendGetOkHttpRequest(etWebEx.getText().toString());
             } catch (Exception e) {
                 e.printStackTrace();
                 exception = e;

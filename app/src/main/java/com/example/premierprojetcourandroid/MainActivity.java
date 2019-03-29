@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int ITEM_ID_DP = 3;
     private static final int ITEM_ID_DAL = 4;
     private static final int ITEM_ID_WEA = 5;
+    private static final int ITEM_ID_CP = 6;
 
     // exo supplementaire
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.add(0, ITEM_ID_DP, 0, "DatePicker");
         menu.add(0, ITEM_ID_DAL, 0, "Service Exemple");
         menu.add(0, ITEM_ID_WEA, 0, "Web Activity");
+        menu.add(0, ITEM_ID_CP, 0, "Code Postal Activity");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             alertDialogBuilder.setIcon(R.mipmap.ic_launcher);
             //Afficher la fenêtre
             alertDialogBuilder.show();
+
         } else if (item.getItemId() == ITEM_ID_DAL) {
             //Etape 1 : Est ce qu'on a déjà la permission ?
             //Attention prendre le Manifest d’android.util
@@ -166,8 +169,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
             }
+
         } else if (item.getItemId() == ITEM_ID_WEA) {
             startActivity(new Intent(this, WebExActivity.class));
+
+        } else if (item.getItemId() == ITEM_ID_CP) {
+            startActivity(new Intent(this, CodePostalActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
