@@ -17,4 +17,8 @@
     <string name="textview">TextView</string>
     <string name="stop">Stop</string>
     <string name="load">Load</string>
+    <string name="button">Button</string>
+    <string name="http_www_google_fr">https://www.google.fr</string>
+    <string name="https_www_google_fr">https://www.google.fr</string>
+    <string name="boutton">Boutton</string>
 </resources>
