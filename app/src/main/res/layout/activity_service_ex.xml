@@ -33,4 +33,10 @@
         android:layout_margin="5dp"
         android:layout_weight="0"
         android:text="@string/textview" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -1,6 +1,8 @@
-package com.example.premierprojetcourandroid;
+package com.example.premierprojetcourandroid.model.ws;
 
 import android.os.SystemClock;
+
+import com.example.premierprojetcourandroid.model.beans.EleveBean;
 
 public class WSUtils {
 

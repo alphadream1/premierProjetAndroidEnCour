@@ -1,19 +1,19 @@
-package com.example.premierprojetcourandroid;
+package com.example.premierprojetcourandroid.model.beans;
 
 public class EleveBean {
 
     String nom;
     String prenom;
 
+    public EleveBean() {
+
+    }
+
     public EleveBean(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
     }
 
-    public String getText() {
-        String res = getNom() + " " + getPrenom();
-        return res;
-    }
     //---------------------
     //GETTER AND SETTER
     //---------------------

@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.premierprojetcourandroid.model.beans.EleveBean;
+import com.example.premierprojetcourandroid.model.ws.WSUtils;
 import com.example.premierprojetcourandroid.service.MyLocationService;
 import com.squareup.otto.Subscribe;
 
@@ -18,9 +21,14 @@ public class ServiceExActivity extends AppCompatActivity implements View.OnClick
     private Button btStop;
     private TextView tvEcranService;
     private Button btStart;
+    private ProgressBar progressBar;
+    private Button btLoad;
+
+    private MonAT monAT;
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_ex);
 
@@ -28,26 +36,20 @@ public class ServiceExActivity extends AppCompatActivity implements View.OnClick
         btStop = findViewById(R.id.btStop);
         tvEcranService = findViewById(R.id.tvEcranService);
         btStart = findViewById(R.id.btStart);
+        btLoad = findViewById(R.id.btLoad);
 
         // ecoute des bouton
         btStart.setOnClickListener(this);
         btStop.setOnClickListener(this);
-    }
+        btLoad.setOnClickListener(this);
 
-
-    @Override
-    public void onClick(View v) {
-        if (v == btStart) {
-            // lance le service
-            startService(new Intent(this, MyLocationService.class));
-        } else if (v == btStop) {
-            // arrete le service
-            stopService(new Intent(this, MyLocationService.class));
-        }
+        //progressBar
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
     }
 
     //--------------------
-    //location
+    //
     //--------------------
 
     @Override
@@ -62,15 +64,64 @@ public class ServiceExActivity extends AppCompatActivity implements View.OnClick
         MyApplication.getBus().unregister(this); //OnStop
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //        if(progressDialog != null) {
+        //            progressDialog.dismiss();
+        //            progressDialog = null;
+        //        }
+    }
+
+
+    //----------------------
+    //CallBack otto
+    //----------------------
+
     @Subscribe
     public void afficherLocation(Location location) {
         tvEcranService.setText(location.toString());
     }
 
+    //----------------------
+    // CallBack ClickBoutton
+    //----------------------
+
+    @Override
+    public void onClick(View v) {
+        if (v == btStart) {
+            // lance le service
+            startService(new Intent(this, MyLocationService.class));
+        } else if (v == btStop) {
+            // arrete le service
+            stopService(new Intent(this, MyLocationService.class));
+        } else if (v == btLoad) {
+            //je lance l'AsyncTask
+
+            if (monAT == null || monAT.getStatus() == AsyncTask.Status.FINISHED) {
+                monAT = new MonAT();
+                monAT.execute();
+            } else {
+                Toast.makeText(this, "Tache déjà  en cours", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    //-------------------
+    //AsyncTask
+    //-------------------
     public class MonAT extends AsyncTask {
 
-        private EleveBean resultat;
-        private Exception exception;
+        EleveBean resultat;
+        Exception exception;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            //progressDialog = ProgressDialog.show(ServiceActivity.this, "", "CHargement en cours");
+        }
 
         @Override
         protected Object doInBackground(Object[] objects) {
@@ -88,10 +139,18 @@ public class ServiceExActivity extends AppCompatActivity implements View.OnClick
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            if (exception != null) { //On affiche l’erreur
-                // Toast.makeText(context, "Erreur :" + exception.getMessage(), Toast.LENGTH_SHORT).show();
-            } else { //On peut modifier les composants graphiques
-                tvEcranService.setText("Nom : " + resultat.getText());
+            progressBar.setVisibility(View.GONE);
+
+//            if(progressDialog != null) {
+//                progressDialog.dismiss();
+//                progressDialog = null;
+//            }
+
+            if (exception != null) {
+                tvEcranService.setText("Une erreur est survenue : " + exception.getMessage());
+            } else {
+                Toast.makeText(ServiceExActivity.this, resultat.getPrenom() + " " + resultat.getNom(), Toast.LENGTH_SHORT).show();
+                tvEcranService.setText(resultat.getPrenom() + " " + resultat.getNom());
             }
         }
     }
