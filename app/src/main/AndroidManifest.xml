@@ -19,6 +19,8 @@
         <activity android:name=".NotificationExActivity"></activity>
         <activity android:name=".CodePostalActivity" />
         <activity android:name=".WebExActivity" />
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".ServiceExActivity" />
 
         <service
             android:name=".service.MyLocationService"
@@ -32,12 +34,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" />
-        <activity android:name=".ServiceExActivity" />
+
 
         <receiver android:name=".MyBroadcast">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".NotificationPublisherBR">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
     </application>

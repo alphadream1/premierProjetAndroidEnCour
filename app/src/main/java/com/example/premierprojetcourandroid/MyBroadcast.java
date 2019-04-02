@@ -9,6 +9,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 public class MyBroadcast extends BroadcastReceiver {
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.w("TAG_", Locale.getDefault().getDisplayLanguage());

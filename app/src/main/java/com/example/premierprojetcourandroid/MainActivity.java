@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int ITEM_ID_DAL = 4;
     private static final int ITEM_ID_WEA = 5;
     private static final int ITEM_ID_CP = 6;
+    private static final int ITEM_ID_N = 7;
 
     // exo supplementaire
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.add(0, ITEM_ID_DAL, 0, "Service Exemple");
         menu.add(0, ITEM_ID_WEA, 0, "Web Activity");
         menu.add(0, ITEM_ID_CP, 0, "Code Postal Activity");
+        menu.add(0, ITEM_ID_N, 0, "Notification Activity");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -175,6 +177,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (item.getItemId() == ITEM_ID_CP) {
             startActivity(new Intent(this, CodePostalActivity.class));
+        } else if (item.getItemId() == ITEM_ID_N) {
+            startActivity(new Intent(this, NotificationExActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

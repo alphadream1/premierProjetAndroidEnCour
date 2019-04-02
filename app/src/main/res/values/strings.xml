@@ -22,4 +22,6 @@
     <string name="https_www_google_fr">https://www.google.fr</string>
     <string name="boutton">Boutton</string>
     <string name="_31410">31410</string>
+    <string name="now">now</string>
+    <string name="delay">delay</string>
 </resources>
