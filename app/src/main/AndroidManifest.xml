@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CodePostalActivity"></activity>
+        <activity android:name=".NotificationExActivity"></activity>
+        <activity android:name=".CodePostalActivity" />
         <activity android:name=".WebExActivity" />
 
         <service

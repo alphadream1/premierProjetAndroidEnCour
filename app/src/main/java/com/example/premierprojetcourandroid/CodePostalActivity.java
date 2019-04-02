@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,13 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
     private EditText etCodePostal;
     private TextView tvCodePostal;
     private Button btCodePostal;
+    private ProgressBar pbCodePostal;
 
     // mes données
+    private ArrayList<CityBean> cities;
+
+    //mes outils
     MonAT monAT;
-    private ArrayList<CityBean> cityBeanArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,12 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
         etCodePostal = findViewById(R.id.etCodePostal);
         tvCodePostal = findViewById(R.id.textView);
         btCodePostal = findViewById(R.id.btCodePostal);
+        pbCodePostal = findViewById(R.id.pbCodePostal);
 
         btCodePostal.setOnClickListener(this);
+        pbCodePostal.setVisibility(View.GONE);
 
-        cityBeanArrayList = new ArrayList<>();
+        cities = new ArrayList<>();
     }
 
     @Override
@@ -54,6 +60,12 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
 
         ArrayList<CityBean> resultat;
         Exception exception;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pbCodePostal.setVisibility(View.VISIBLE);
+        }
 
 
         @Override
@@ -76,7 +88,13 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
             if (exception != null) {
                 tvCodePostal.setText("Une erreur est survenue : " + exception.getMessage());
             } else {
-                tvCodePostal.setText("");
+                //Afficher le resultat
+                String aAfficher = "";
+                for (CityBean cityBean : resultat) {
+                    aAfficher += cityBean.getCp() + " : " + cityBean.getVille() + " \n";
+                }
+                tvCodePostal.setText(aAfficher);
+                pbCodePostal.setVisibility(View.GONE);
             }
         }
     }

@@ -1,9 +1,13 @@
 package com.example.premierprojetcourandroid.model.ws;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.example.premierprojetcourandroid.model.beans.CityBean;
 import com.example.premierprojetcourandroid.model.beans.EleveBean;
+import com.example.premierprojetcourandroid.model.beans.ResultBean;
+import com.example.premierprojetcourandroid.utils.OkHttpUtils;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -21,16 +25,18 @@ public class WSUtils {
     }
 
     public static ArrayList<CityBean> getCities(String cp) throws Exception {
-        ArrayList<CityBean> resultat = new ArrayList<>();
-        String UsedUrl = URL_CP + cp;
+        String json = OkHttpUtils.sendGetOkHttpRequest(URL_CP + cp);
 
-     /*   //Création de l'objet
-        Gson gson= new Gson();
+        Log.w("TAG_", "reçu: " + json);
+
         //Parser un flux ou un String contenant du JSON dont le 1er élément est un Objet
-        ResultBean result= gson.fromJson(monStringJson, ResultBean.class);
-        //Parser un flux ou un String contenant du JSON dont le premier élément est une List
-        ArrayList<CityBean> list= gson.fromJson(monStringJson,
-                newTypeToken<ArrayList<MessageBean>>(){}.getType());*/
-        return resultat;
+        ResultBean resultBean = new Gson().fromJson(json, ResultBean.class);//Parser avec Gson
+
+        //Erreur
+        if (resultBean.getErrors() != null) {
+            throw new Exception(resultBean.getErrors().getMessage());
+        } else {
+            return resultBean.getResults();
+        }
     }
 }

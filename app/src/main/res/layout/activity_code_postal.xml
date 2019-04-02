@@ -30,6 +30,12 @@
             android:text="@string/boutton" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/pbCodePostal"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -47,4 +53,5 @@
                 android:text="@string/textview" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
