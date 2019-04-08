@@ -24,4 +24,7 @@
     <string name="_31410">31410</string>
     <string name="now">now</string>
     <string name="delay">delay</string>
+    <string name="cp">cp</string>
+    <string name="ville">ville</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -3,11 +3,12 @@ package com.example.premierprojetcourandroid;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.premierprojetcourandroid.model.beans.CityBean;
@@ -19,15 +20,17 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
 
     // mes composants graphique
     private EditText etCodePostal;
-    private TextView tvCodePostal;
     private Button btCodePostal;
+    //private TextView tvCodePostal;
     private ProgressBar pbCodePostal;
+    private RecyclerView rv;
 
     // mes données
     private ArrayList<CityBean> cities;
 
     //mes outils
     MonAT monAT;
+    private CityAdapter cityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,21 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_code_postal);
 
         etCodePostal = findViewById(R.id.etCodePostal);
-        tvCodePostal = findViewById(R.id.textView);
         btCodePostal = findViewById(R.id.btCodePostal);
         pbCodePostal = findViewById(R.id.pbCodePostal);
 
         btCodePostal.setOnClickListener(this);
         pbCodePostal.setVisibility(View.GONE);
 
+        // creation de la liste
         cities = new ArrayList<>();
+        //instanciation d'un CityAdapter
+        cityAdapter = new CityAdapter(cities);
+        rv = findViewById(R.id.rvCodePostal);
+        //adapter a affiche
+        rv.setAdapter(cityAdapter);
+        // gestion de l'affichage
+        rv.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -86,15 +96,25 @@ public class CodePostalActivity extends AppCompatActivity implements View.OnClic
             super.onPostExecute(o);
 
             if (exception != null) {
-                tvCodePostal.setText("Une erreur est survenue : " + exception.getMessage());
+                Toast.makeText(CodePostalActivity.this, "Une erreur est survenue : " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                //tvCodePostal.setText("Une erreur est survenue : " + exception.getMessage());
             } else {
-                //Afficher le resultat
-                String aAfficher = "";
-                for (CityBean cityBean : resultat) {
-                    aAfficher += cityBean.getCp() + " : " + cityBean.getVille() + " \n";
-                }
-                tvCodePostal.setText(aAfficher);
+                // copie les adresses des données d'une liste a l'autre.
+                cities.clear();
+                cities.addAll(resultat);
+
+                cityAdapter.notifyDataSetChanged();
+
                 pbCodePostal.setVisibility(View.GONE);
+
+//                //Afficher le resultat
+//                String aAfficher = "";
+//                for (CityBean cityBean : resultat) {
+//                    aAfficher += cityBean.getCp() + " : " + cityBean.getVille() + " \n";
+//                }
+//                tvCodePostal.setText(aAfficher);
+//                pbCodePostal.setVisibility(View.GONE);
+
             }
         }
     }

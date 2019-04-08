@@ -13,8 +13,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
 import com.example.premierprojetcourandroid.MainActivity;
-import com.example.premierprojetcourandroid.NotificationPublisherBR;
 import com.example.premierprojetcourandroid.R;
+import com.example.premierprojetcourandroid.broadcast.NotificationPublisherBR;
 
 public class NotificationUtils {
 
@@ -75,4 +75,24 @@ public class NotificationUtils {
                 c.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
     }
+
+    public static Notification getNotif(Context c, String message) {
+        //Initialisation du chanel
+        initChannel(c);
+        //Ce qui se passera quand on cliquera sur la notif
+        Intent intent = new Intent(c, MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(c, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        //La notification
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(c, CHANNEL_ID);
+        notificationBuilder.setSmallIcon(R.mipmap.ic_valider)
+                .setContentTitle("Ma notification en arriÃ¨re plan")
+                .setContentText(message)
+                .setContentIntent(pi)//le clic dessus
+                .setPriority(NotificationManager.IMPORTANCE_HIGH)
+                .setDefaults(Notification.DEFAULT_ALL);//Son + afficher la notification
+
+        return notificationBuilder.build();
+    }
 }
+

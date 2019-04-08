@@ -1,10 +1,10 @@
 package com.example.premierprojetcourandroid;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -35,10 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int ITEM_ID_DAL = 4;
     private static final int ITEM_ID_WEA = 5;
     private static final int ITEM_ID_CP = 6;
-    private static final int ITEM_ID_N = 7;
+    private static final int ITEM_ID_NOTIF = 7;
+    private static final int ITEM_ID_GM = 8;
 
     // exo supplementaire
-    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    @SuppressLint("SimpleDateFormat")
+    private static final SimpleDateFormat FORMAT;
+
+    static {
+        FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    }
 
     // 1) déclaration composant
     private Button btValider, btAnnuler;
@@ -113,7 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menu.add(0, ITEM_ID_DAL, 0, "Service Exemple");
         menu.add(0, ITEM_ID_WEA, 0, "Web Activity");
         menu.add(0, ITEM_ID_CP, 0, "Code Postal Activity");
-        menu.add(0, ITEM_ID_N, 0, "Notification Activity");
+        menu.add(0, ITEM_ID_NOTIF, 0, "Notification Activity");
+        menu.add(0, ITEM_ID_GM, 0, "Google Maps");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -146,13 +153,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             alertDialogBuilder.setTitle("Mon titre");
             //bouton ok
             alertDialogBuilder.setPositiveButton("ok",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Affiche un toast apres le click sur le bouton ok
-                            Toast.makeText(MainActivity.this, "Click sur ok",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                    (dialog, which) -> {
+                        //Affiche un toast apres le click sur le bouton ok
+                        Toast.makeText(MainActivity.this, "Click sur ok",
+                                Toast.LENGTH_SHORT).show();
                     });
             //Icone
             alertDialogBuilder.setIcon(R.mipmap.ic_launcher);
@@ -177,10 +181,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (item.getItemId() == ITEM_ID_CP) {
             startActivity(new Intent(this, CodePostalActivity.class));
-        } else if (item.getItemId() == ITEM_ID_N) {
+        } else if (item.getItemId() == ITEM_ID_NOTIF) {
             startActivity(new Intent(this, NotificationExActivity.class));
+        } else if (item.getItemId() == ITEM_ID_GM) {
+            startActivity(new Intent(this, MapsActivity.class));
         }
-        return super.onOptionsItemSelected(item);
+        boolean b;
+        b = super.onOptionsItemSelected(item);
+        return b;
     }
 
     //--------------------
@@ -237,7 +245,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //--------------------
     //Private
     //--------------------
-
 
 }
 

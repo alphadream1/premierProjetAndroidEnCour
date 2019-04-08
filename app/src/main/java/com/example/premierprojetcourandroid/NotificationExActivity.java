@@ -34,7 +34,7 @@ public class NotificationExActivity extends AppCompatActivity implements View.On
 
         } else if (v == btDelay) {
             //remplir ici pour notif decalé
-            NotificationUtils.scheduleNotification(this, "DELAY", 5000);
+            NotificationUtils.scheduleNotification(this, "DELAY", 15000);
         }
     }
 
