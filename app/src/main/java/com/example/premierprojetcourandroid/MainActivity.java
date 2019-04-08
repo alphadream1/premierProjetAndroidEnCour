@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int ITEM_ID_NOTIF = 7;
     private static final int ITEM_ID_GM = 8;
 
+    // pour avoir des samples de code, file/new/import sample
+
     // exo supplementaire
     @SuppressLint("SimpleDateFormat")
     private static final SimpleDateFormat FORMAT;
