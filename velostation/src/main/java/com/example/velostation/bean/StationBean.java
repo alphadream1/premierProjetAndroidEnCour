@@ -1,61 +1,62 @@
 package com.example.velostation.bean;
 
 public class StationBean {
+    private int number;
 
-    private Integer number;
-    private String contract_name;
-    private String name;
+    private int bike_stands;
+
     private String address;
+
+    private int available_bikes;
+
+    private String bonus;
+
+
+    private String name;
+
+    private String contract_name;
+
     private PositionBean position;
-    private Boolean banking;
-    private Boolean bonus;
-    private Integer bike_stands;
-    private Integer available_bike_stands;
-    private Integer available_bikes;
+
+    private int available_bike_stands;
+
+    private String banking;
+
+
     private String status;
-    private Integer last_update;
 
-    public StationBean() {
-        super();
+
+    @Override
+    public String toString() {
+        return "StationBean{" +
+                "number=" + number +
+                ", bike_stands=" + bike_stands +
+                ", address='" + address + '\'' +
+                ", available_bikes=" + available_bikes +
+                ", bonus='" + bonus + '\'' +
+                ", name='" + name + '\'' +
+                ", contract_name='" + contract_name + '\'' +
+                ", position=" + position +
+                ", available_bike_stands=" + available_bike_stands +
+                ", banking='" + banking + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 
-    public StationBean(Integer number, String contract_name, String name, String address, PositionBean position, Boolean banking, Boolean bonus, Integer bike_stands, Integer available_bike_stands, Integer available_bikes, String status, Integer last_update) {
-        this.number = number;
-        this.contract_name = contract_name;
-        this.name = name;
-        this.address = address;
-        this.position = position;
-        this.banking = banking;
-        this.bonus = bonus;
-        this.bike_stands = bike_stands;
-        this.available_bike_stands = available_bike_stands;
-        this.available_bikes = available_bikes;
-        this.status = status;
-        this.last_update = last_update;
-    }
-
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
-    public String getContract_name() {
-        return contract_name;
+    public int getBike_stands() {
+        return bike_stands;
     }
 
-    public void setContract_name(String contract_name) {
-        this.contract_name = contract_name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setBike_stands(int bike_stands) {
+        this.bike_stands = bike_stands;
     }
 
     public String getAddress() {
@@ -66,6 +67,38 @@ public class StationBean {
         this.address = address;
     }
 
+    public int getAvailable_bikes() {
+        return available_bikes;
+    }
+
+    public void setAvailable_bikes(int available_bikes) {
+        this.available_bikes = available_bikes;
+    }
+
+    public String getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(String bonus) {
+        this.bonus = bonus;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContract_name() {
+        return contract_name;
+    }
+
+    public void setContract_name(String contract_name) {
+        this.contract_name = contract_name;
+    }
+
     public PositionBean getPosition() {
         return position;
     }
@@ -74,44 +107,20 @@ public class StationBean {
         this.position = position;
     }
 
-    public Boolean getBanking() {
-        return banking;
-    }
-
-    public void setBanking(Boolean banking) {
-        this.banking = banking;
-    }
-
-    public Boolean getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(Boolean bonus) {
-        this.bonus = bonus;
-    }
-
-    public Integer getBike_stands() {
-        return bike_stands;
-    }
-
-    public void setBike_stands(Integer bike_stands) {
-        this.bike_stands = bike_stands;
-    }
-
-    public Integer getAvailable_bike_stands() {
+    public int getAvailable_bike_stands() {
         return available_bike_stands;
     }
 
-    public void setAvailable_bike_stands(Integer available_bike_stands) {
+    public void setAvailable_bike_stands(int available_bike_stands) {
         this.available_bike_stands = available_bike_stands;
     }
 
-    public Integer getAvailable_bikes() {
-        return available_bikes;
+    public String getBanking() {
+        return banking;
     }
 
-    public void setAvailable_bikes(Integer available_bikes) {
-        this.available_bikes = available_bikes;
+    public void setBanking(String banking) {
+        this.banking = banking;
     }
 
     public String getStatus() {
@@ -122,11 +131,5 @@ public class StationBean {
         this.status = status;
     }
 
-    public Integer getLast_update() {
-        return last_update;
-    }
 
-    public void setLast_update(Integer last_update) {
-        this.last_update = last_update;
-    }
 }

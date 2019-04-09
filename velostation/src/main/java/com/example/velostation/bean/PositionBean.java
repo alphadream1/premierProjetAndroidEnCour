@@ -1,27 +1,29 @@
 package com.example.velostation.bean;
 
 public class PositionBean {
-    private Double lat;
-    private Double lng;
+    private double lng;
+    private double lat;
 
-    public PositionBean(Double lat, Double lng) {
-        this.lat = lat;
-        this.lng = lng;
-    }
-
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLng() {
+    public double getLng() {
         return lng;
     }
 
-    public void setLng(Double lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    @Override
+    public String toString() {
+        return "Class PositionBean [lng = " + lng + ", lat = " + lat + "]";
+    }
+
+
 }
