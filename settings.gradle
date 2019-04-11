@@ -1,1 +1,1 @@
-include ':app', ':velostation'
+include ':app', ':velostation', ':mybykestationtoulouse', ':localisermastation'

@@ -180,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (item.getItemId() == ITEM_ID_WEA) {
             startActivity(new Intent(this, WebExActivity.class));
-
         } else if (item.getItemId() == ITEM_ID_CP) {
             startActivity(new Intent(this, CodePostalActivity.class));
         } else if (item.getItemId() == ITEM_ID_NOTIF) {

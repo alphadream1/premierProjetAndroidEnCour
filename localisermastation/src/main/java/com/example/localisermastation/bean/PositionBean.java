@@ -1,4 +1,4 @@
-package com.example.velostation.bean;
+package com.example.localisermastation.bean;
 
 public class PositionBean {
     private double lng;

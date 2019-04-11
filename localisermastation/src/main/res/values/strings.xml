@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LocaliserMaStation</string>
+    <string name="logov_locoeur">LogoVéloCoeur</string>
+    <string name="bienvenue_sur_localiser_ma_station">Bienvenue sur Localiser ma Station</string>
+    <string name="choisissez_votre_mode_d_affichage">Choisissez votre mode d\'affichage :</string>
+    <string name="mode_pi_ton">Mode Piéton</string>
+    <string name="mode_cycliste">Mode Cycliste</string>
+    <string name="go">Go</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="retour">Retour</string>
+</resources>
