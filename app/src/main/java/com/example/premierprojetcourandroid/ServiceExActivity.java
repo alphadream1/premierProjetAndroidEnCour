@@ -141,11 +141,6 @@ public class ServiceExActivity extends AppCompatActivity implements View.OnClick
             super.onPostExecute(o);
             progressBar.setVisibility(View.GONE);
 
-//            if(progressDialog != null) {
-//                progressDialog.dismiss();
-//                progressDialog = null;
-//            }
-
             if (exception != null) {
                 tvEcranService.setText("Une erreur est survenue : " + exception.getMessage());
             } else {

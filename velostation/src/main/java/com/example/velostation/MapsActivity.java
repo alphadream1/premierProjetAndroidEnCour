@@ -101,7 +101,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     latLngBounds.include(pos);
                     nbStationAffiche++;
                 }
-
             }
         }
 

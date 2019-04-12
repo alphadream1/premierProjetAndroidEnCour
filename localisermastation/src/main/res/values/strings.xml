@@ -8,4 +8,9 @@
     <string name="go">Go</string>
     <string name="title_activity_maps">Map</string>
     <string name="retour">Retour</string>
+    <string name="status">status:</string>
+    <string name="nbre_de_place">Nbre de place</string>
+    <string name="nbre_place_disponible">Nbre place disponible</string>
+    <string name="nbre_v_lo_disponible">Nbre vélo disponible</string>
+    <string name="adresse">Adresse</string>
 </resources>

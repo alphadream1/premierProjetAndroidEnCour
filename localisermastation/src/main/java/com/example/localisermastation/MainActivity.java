@@ -21,7 +21,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickGo(View view) {
-        startActivity(new Intent(this, MapsActivity.class));
+        Intent intent = new Intent(this, MapsActivity.class);
+        if (rbCycliste.isChecked()) {
+            intent.putExtra("Mode_Cycliste", true);
+        } else if (rbPieton.isChecked()) {
+            intent.putExtra("Mode_Pieton", true);
+        }
+        startActivity(intent);
         finish();
     }
 }

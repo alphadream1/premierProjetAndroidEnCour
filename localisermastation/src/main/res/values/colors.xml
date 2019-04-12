@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="JoliVert">#019321</color>
+    <color name="JolieOrange">#FF7605</color>
+    <color name="JolieRouge">#DD0600</color>
+    <color name="JolieBleu">#1835BC</color>
+    <color name="JolieJaune">#FFDE02</color>
 </resources>
