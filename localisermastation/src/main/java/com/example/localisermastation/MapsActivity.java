@@ -1,8 +1,12 @@
 package com.example.localisermastation;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +32,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter {
 
@@ -35,6 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<StationBean> data;
     private Boolean modeAffichagePieton;
     private Boolean modeAffichageCycliste;
+    private LocationManager lm;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,26 +100,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         }
-
         //nettoyage de la carte
         mMap.clear();
         //Créer le build pour l'animate camera
         LatLngBounds.Builder latLngBounds = new LatLngBounds.Builder();
         int nbStationAffiche = 0;
-        // affichage des markers
+        //--------------
 
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        location = lm.getLastKnownLocation(lm.getBestProvider(new Criteria(), false));
+
+        // affichage des markers
         for (StationBean temp : data) {
             if (temp.getPosition() != null) {
                 LatLng pos = new LatLng(temp.getPosition().getLat(), temp.getPosition().getLng());
+                // remplissage des données distance de chaque StationBean
+                if (location != null) {
+                    temp.setDistance((long) distance(location, pos));
+                }
                 // debut du choix des markers
                 if (temp.getStatus().equals("OPEN")) {
-                    mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).setTag(temp);
+                    if (modeAffichageCycliste) {
+                        if (temp.getAvailable_bike_stands() >= temp.getBike_stands() / 2) {
+                            mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).setTag(temp);
+                        } else if (temp.getAvailable_bike_stands() < temp.getBike_stands() / 2) {
+                            mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).setTag(temp);
+                        } else if (temp.getAvailable_bike_stands() == 0) {
+                            mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setTag(temp);
+                        }
+
+                    } else if (modeAffichagePieton) {
+                        if (temp.getAvailable_bikes() >= temp.getBike_stands() / 2) {
+                            mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))).setTag(temp);
+                        } else if (temp.getAvailable_bikes() < temp.getBike_stands() / 2) {
+                            mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))).setTag(temp);
+                        } else if (temp.getAvailable_bikes() == 0) {
+                            mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setTag(temp);
+                        }
+                    }
                 } else {
-                    mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))).setTag(temp);
+                    mMap.addMarker(new MarkerOptions().position(pos).title(temp.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))).setTag(temp);
                 }
                 //Remplir le build
                 if (temp.getNumber() == 1033) {
-                    Log.w("Tag_", "marker bergerac non compter");
+                    Log.w("TAG_", "marker bergerac non compter");
                 } else {
                     latLngBounds.include(pos);
                     nbStationAffiche++;
@@ -131,6 +162,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onClickRetour(View view) {
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    public void onClickZoom(View view) {
+        Collections.sort(data, StationBean.ComparatorDistance);
+        LatLngBounds.Builder latLngProche = new LatLngBounds.Builder();
+
+        for (int i = 0; i < 5; i++) {
+            if (data.get(i).getPosition() != null) {
+                latLngProche.include(new LatLng(data.get(i).getPosition().getLat(), data.get(i).getPosition().getLng()));
+            }
+        }
+        latLngProche.include(new LatLng(location.getLatitude(), location.getLongitude()));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngProche.build(), 100));
+    }
+
+    public void OnClickRetourTls(View view) {
+        refreshMap();
+    }
+
+    public static double distance(Location location, LatLng latLng) {
+        double theta = location.getLongitude() - latLng.longitude;
+        double dist = Math.sin(Math.toRadians(location.getLatitude())) * Math.sin(Math.toRadians(latLng.latitude)) + Math.cos(Math.toRadians(location.getLatitude())) * Math.cos(Math.toRadians(latLng.latitude)) * Math.cos(Math.toRadians(theta));
+        dist = Math.acos(dist);
+        dist = Math.toDegrees(dist);
+        dist = dist * 60 * 1.1515;
+        Log.w("TAG_", "" + dist);
+        return dist;
     }
 
     //-----------------------

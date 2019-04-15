@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -63,9 +64,10 @@
 
     <Button
         android:id="@+id/btGo"
-        android:onClick="onClickGo"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/JoliVert"
+        android:onClick="onClickGo"
         android:text="@string/go"
         android:textColorHint="@color/colorPrimary"
         android:textSize="24sp" />

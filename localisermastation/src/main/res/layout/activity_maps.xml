@@ -11,11 +11,51 @@
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
 
-    <Button
-        android:id="@+id/btRetour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickRetour"
-        android:text="@string/retour"
-        android:textSize="18sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btRetour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:onClick="onClickRetour"
+                android:text="@string/retour_page_d_accueil"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btZoomPos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:onClick="onClickZoom"
+                android:text="@string/zoom_ma_position" />
+
+            <Button
+                android:id="@+id/btRetourTls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:onClick="OnClickRetourTls"
+                android:text="@string/retour_carte_toulouse" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>

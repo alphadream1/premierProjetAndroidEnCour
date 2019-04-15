@@ -1,5 +1,7 @@
 package com.example.localisermastation.bean;
 
+import java.util.Comparator;
+
 public class StationBean {
     private int number;
 
@@ -22,6 +24,7 @@ public class StationBean {
 
     private String banking;
 
+    private long distance;
 
     private String status;
 
@@ -42,6 +45,8 @@ public class StationBean {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+    public static Comparator<StationBean> ComparatorDistance = (o1, o2) -> Long.compare(o1.getDistance(), o2.getDistance());
 
     public int getNumber() {
         return number;
@@ -129,6 +134,14 @@ public class StationBean {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public long getDistance() {
+        return distance;
+    }
+
+    public void setDistance(long distance) {
+        this.distance = distance;
     }
 
 }
