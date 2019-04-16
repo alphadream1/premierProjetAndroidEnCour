@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
         android:gravity="center"
         android:text="@string/bienvenue_sur_localiser_ma_station"
         android:textSize="24sp" />
@@ -64,12 +63,11 @@
 
     <Button
         android:id="@+id/btGo"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/JoliVert"
+        android:backgroundTint="@color/JolieJaune"
         android:onClick="onClickGo"
         android:text="@string/go"
-        android:textColorHint="@color/colorPrimary"
         android:textSize="24sp" />
 
 </LinearLayout>

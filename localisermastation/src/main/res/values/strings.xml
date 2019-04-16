@@ -16,5 +16,6 @@
     <string name="retour_page_d_accueil">Retour Page D\'accueil</string>
     <string name="mode_cycliste">Mode Cycliste</string>
     <string name="zoom_ma_position">Zoom Ma Position</string>
-    <string name="retour_carte_toulouse">Retour carte Toulouse</string>
+    <string name="zoom_toulouse">Zoom Toulouse</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

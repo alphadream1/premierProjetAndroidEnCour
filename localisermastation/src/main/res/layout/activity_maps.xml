@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,32 +19,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btRetour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:onClick="onClickRetour"
-                android:text="@string/retour_page_d_accueil"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btZoomPos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/JolieJaune"
                 android:onClick="onClickZoom"
                 android:text="@string/zoom_ma_position" />
 
@@ -51,11 +36,13 @@
                 android:id="@+id/btRetourTls"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="1dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="7dp"
+                android:backgroundTint="@color/JolieJaune"
                 android:onClick="OnClickRetourTls"
-                android:text="@string/retour_carte_toulouse" />
-
+                android:text="@string/zoom_toulouse" />
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
