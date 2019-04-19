@@ -123,14 +123,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (modeAffichageCycliste) {
                         if (temp.getAvailable_bike_stands() >= temp.getBike_stands() / 2) {
                             markerIcone = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-                        } else if (temp.getAvailable_bike_stands() < temp.getBike_stands() / 2) {
+                        } else if (temp.getAvailable_bike_stands() < temp.getBike_stands() / 2 && temp.getAvailable_bike_stands() > 0) {
                             markerIcone = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
                         }
 
                     } else {
                         if (temp.getAvailable_bikes() >= temp.getBike_stands() / 2) {
                             markerIcone = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
-                        } else if (temp.getAvailable_bikes() < temp.getBike_stands() / 2) {
+                        } else if (temp.getAvailable_bikes() < temp.getBike_stands() / 2 && temp.getAvailable_bike_stands() > 0) {
                             markerIcone = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE);
                         }
                     }
